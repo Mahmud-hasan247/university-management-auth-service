@@ -1,7 +1,7 @@
-import { Request, Response } from 'express'
+import { RequestHandler } from 'express'
 import userServices from './user.services'
 
-const userCreate = async (req: Request, res: Response) => {
+const userCreate: RequestHandler = async (req, res, next) => {
   try {
     const { user } = req.body
     const result = await userServices.createUser(user)
@@ -11,11 +11,7 @@ const userCreate = async (req: Request, res: Response) => {
       data: result,
     })
   } catch (error) {
-    res.status(400).json({
-      code: 400,
-      message: 'Failed to create user',
-      error,
-    })
+    next(error)
   }
 }
 
