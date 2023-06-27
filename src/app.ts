@@ -15,10 +15,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/v1/users/', userRoutes)
 
 // testing purposes
-// app.get('/', (req: Request, res: Response, next: NextFunction) => {
-//   throw new ApiError(400, 'new error occurred')
-//   // next('new error occurred')
-//   // res.send('Working successfully!')
+// app.get('/',  (req: Request, res: Response, next: NextFunction) => {
+//     console.log(x);
+
+// //    Promise.reject(new Error('unhandled promise rejection!'))
 // })
 
 app.use(globalErrorHandler)
