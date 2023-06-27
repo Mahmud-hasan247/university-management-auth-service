@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
-import { IGenericErrorMessages } from '../interfaces/validationErrorMessage'
-import { IGenericErrorResponse } from '../interfaces/errorResponse'
+import mongoose from 'mongoose';
+import { IGenericErrorMessages } from '../interfaces/validationErrorMessage';
+import { IGenericErrorResponse } from '../interfaces/errorResponse';
 
 const validationErrorHandler = (err: mongoose.Error.ValidationError) => {
   const errorMessages: IGenericErrorMessages[] = Object.values(err.errors).map(
@@ -8,17 +8,17 @@ const validationErrorHandler = (err: mongoose.Error.ValidationError) => {
       return {
         path: el?.path,
         message: el?.message,
-      }
+      };
     }
-  )
+  );
 
   const errorResponse: IGenericErrorResponse = {
     statusCode: 400,
     message: 'Validation Error',
     errorMessages,
-  }
+  };
 
-  return errorResponse
-}
+  return errorResponse;
+};
 
-export default validationErrorHandler
+export default validationErrorHandler;
