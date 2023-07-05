@@ -6,7 +6,7 @@ import requestValidate from '../../middlewares/requestValidation';
 const router = express.Router();
 
 router.post(
-  '/create-user',
+  '/create_user',
   requestValidate(UserZodSchema),
   userController.userCreate
 );
