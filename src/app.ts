@@ -1,7 +1,8 @@
 import cors from 'cors';
-import express, { Application } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
+import { StatusCodes } from 'http-status-codes';
 
 const app: Application = express();
 
@@ -28,5 +29,16 @@ app.use(routes);
 // );
 
 app.use(globalErrorHandler);
+
+// handling not found route
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(StatusCodes.NOT_FOUND).json({
+    statusCode: StatusCodes.NOT_FOUND,
+    success: false,
+    message: 'Not Found',
+    errorMessages: [{ path: req.originalUrl, message: 'Not Found' }],
+  });
+  next();
+});
 
 export default app;
