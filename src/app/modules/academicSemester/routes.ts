@@ -3,12 +3,12 @@ import requestValidate from '../../middlewares/requestValidation';
 import academicSemesterZodSchema from './zodValidations';
 import academicSemesterCreate from './controllers';
 
-const academicSemesterRoute = express.Router();
+const router = express.Router();
 
-academicSemesterRoute.post(
+router.post(
   '/create_semester',
   requestValidate(academicSemesterZodSchema),
   academicSemesterCreate
 );
 
-export default academicSemesterRoute;
+export const academicSemesterRoutes = router;
