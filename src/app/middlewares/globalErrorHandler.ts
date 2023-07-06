@@ -7,6 +7,7 @@ import { IGenericErrorMessages } from '../../interfaces/validationErrorMessage';
 import { errorLogger } from '../../shared/logger';
 import { ZodError } from 'zod';
 import zodErrorHandler from '../../errors/zodErrorHandler';
+import handleCastError from '../../errors/handleCastError';
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   //  ________ logger ___________
@@ -25,6 +26,15 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     statusCode = simplifiedErrors?.statusCode;
     message = simplifiedErrors?.message;
     errorMessages = simplifiedErrors?.errorMessages;
+    //
+    // _________________________________________
+  } else if (err?.name === 'CastError') {
+    // ________ Cast Error _______________
+    const simplifiedErrors: IGenericErrorResponse = handleCastError(err);
+    statusCode = simplifiedErrors?.statusCode;
+    message = simplifiedErrors?.message;
+    errorMessages = simplifiedErrors?.errorMessages;
+
     //
     // _________________________________________
   } else if (err instanceof ZodError) {

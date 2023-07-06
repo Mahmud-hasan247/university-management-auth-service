@@ -5,7 +5,7 @@ import {
   academicSemesterTitles,
 } from './constants';
 
-const academicSemesterZodSchema = z.object({
+const academicSemesterCreateZodSchema = z.object({
   body: z.object({
     title: z.enum([...academicSemesterTitles] as [string, ...string[]], {
       required_error: 'Title is Required',
@@ -25,4 +25,49 @@ const academicSemesterZodSchema = z.object({
   }),
 });
 
-export default academicSemesterZodSchema;
+const academicSemesterUpdateZodSchema = z
+  .object({
+    body: z.object({
+      title: z
+        .enum([...academicSemesterTitles] as [string, ...string[]], {
+          required_error: 'Title is Required',
+        })
+        .optional(),
+      year: z
+        .string({
+          required_error: 'Year is Required',
+        })
+        .optional(),
+      code: z
+        .enum([...academicSemesterCodes] as [string, ...string[]], {
+          required_error: 'Code is Required',
+        })
+        .optional(),
+      startMonth: z
+        .enum([...academicSemesterMonths] as [string, ...string[]], {
+          required_error: 'Start month is Required',
+        })
+        .optional(),
+      endMonth: z
+        .enum([...academicSemesterMonths] as [string, ...string[]], {
+          required_error: 'End month is Required',
+        })
+        .optional(),
+    }),
+  })
+  .refine(
+    data => {
+      return (
+        (data?.body?.title && data?.body?.code) ||
+        (!data?.body?.title && !data?.body?.code)
+      );
+    },
+    {
+      message: 'Either both title and code should provided or neither!',
+    }
+  );
+
+export const zodSchemas = {
+  academicSemesterCreateZodSchema,
+  academicSemesterUpdateZodSchema,
+};

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
 import { catchAsync } from '../../../shared/catchAsync';
 import { sendResponse } from '../../../shared/sendResponse';
@@ -21,16 +22,11 @@ const academicSemesterCreate = catchAsync(
       message: 'Academic Semester Created Successfully!',
       data: result,
     });
-    next();
   }
 );
 
 const getAllAcademicSemesters = catchAsync(
-  async (
-    req: Request,
-    res: Response
-    //  next: NextFunction
-  ) => {
+  async (req: Request, res: Response) => {
     const filters = pick(req?.query, academicSemesterFilterableFields);
     const paginationOptions = pick(req?.query, paginationFields);
 
@@ -38,7 +34,6 @@ const getAllAcademicSemesters = catchAsync(
       filters,
       paginationOptions
     );
-    // next();
     sendResponse<IAcademicSemester[]>(res, {
       statusCode: StatusCodes.OK,
       success: true,
@@ -61,8 +56,35 @@ const getSingleSemester = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const semesterUpdate = catchAsync(async (req: Request, res: Response) => {
+  const id = req?.params?.id;
+  const data = req?.body;
+  const result = await academicSemesterServices?.updateSemester(id, data);
+
+  sendResponse<IAcademicSemester>(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Semester Updated Successfully!',
+    data: result,
+  });
+});
+
+const semesterDelete = catchAsync(async (req: Request, res: Response) => {
+  const id = req?.params?.id;
+  const result = await academicSemesterServices?.deleteSemester(id);
+
+  sendResponse<IAcademicSemester>(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Semester Deleted Successfully!',
+    data: result,
+  });
+});
+
 export const academicSemesterControllers = {
   academicSemesterCreate,
   getAllAcademicSemesters,
   getSingleSemester,
+  semesterUpdate,
+  semesterDelete,
 };
