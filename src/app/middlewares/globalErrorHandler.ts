@@ -2,7 +2,7 @@ import { ErrorRequestHandler } from 'express';
 import config from '../../config';
 import ApiError from '../../errors/ApiError';
 import validationErrorHandler from '../../errors/validationErrorHandler';
-import { IGenericErrorResponse } from '../../interfaces/errorResponse';
+import { IGenericErrorResponse } from '../../interfaces/common';
 import { IGenericErrorMessages } from '../../interfaces/validationErrorMessage';
 import { errorLogger } from '../../shared/logger';
 import { ZodError } from 'zod';

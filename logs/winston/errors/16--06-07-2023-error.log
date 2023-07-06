@@ -1,0 +1,10 @@
+Thu Jul 06 2023, 16: 4: 15 [Error log] error: Failed to connect database Server selection timed out after 30000 ms
+Thu Jul 06 2023, 16: 6: 10 [Error log] error: Failed to connect database Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+Thu Jul 06 2023, 16: 11: 47 [Error log] error: Failed to connect database queryTxt ESERVFAIL university-database.tigdsph.mongodb.net
+Thu Jul 06 2023, 16: 11: 58 [Error log] error: Failed to connect database queryTxt ESERVFAIL university-database.tigdsph.mongodb.net
+Thu Jul 06 2023, 16: 12: 1 [Error log] error: Failed to connect database queryTxt ESERVFAIL university-database.tigdsph.mongodb.net
+Thu Jul 06 2023, 16: 13: 7 [Error log] error: Failed to connect database getaddrinfo EAI_AGAIN ac-fpnbalk-shard-00-01.tigdsph.mongodb.net
+Thu Jul 06 2023, 16: 14: 53 [Error log] error: Failed to connect database connection 1 to 54.85.23.35:27017 timed out
+Thu Jul 06 2023, 16: 15: 5 [Error log] error: Failed to connect database queryTxt ESERVFAIL university-database.tigdsph.mongodb.net
+Thu Jul 06 2023, 16: 21: 50 [Error log] error: Failed to connect database querySrv ESERVFAIL _mongodb._tcp.university-database.tigdsph.mongodb.net
+Thu Jul 06 2023, 16: 31: 7 [Error log] error: Failed to connect database queryTxt ESERVFAIL university-database.tigdsph.mongodb.net
