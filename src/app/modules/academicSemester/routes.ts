@@ -12,6 +12,11 @@ router.post(
 );
 
 router.get(
+  '/get_single_semester/:id',
+  academicSemesterControllers?.getSingleSemester
+);
+
+router.get(
   '/get_semesters',
   academicSemesterControllers?.getAllAcademicSemesters
 );
