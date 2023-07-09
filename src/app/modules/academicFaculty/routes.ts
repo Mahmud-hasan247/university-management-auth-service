@@ -13,6 +13,7 @@ router.post(
 
 router.patch(
   '/update_academic_faculty/:id',
+  requestValidate(academic_faculty_zod_validation?.update_schema),
   academic_faculty_controllers?.academic_faculty_update
 );
 
@@ -31,4 +32,4 @@ router.get(
   academic_faculty_controllers?.academic_faculties_get
 );
 
-export const academicFacultyRoutes = router;
+export const academic_faculty_routes = router;

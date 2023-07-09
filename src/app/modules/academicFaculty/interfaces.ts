@@ -5,3 +5,5 @@ export type IAcademic_faculty = {
 };
 
 export type academic_faculty_model = Model<IAcademic_faculty, object>;
+
+export type IAcademic_faculty_filters = { searchTerm?: string };

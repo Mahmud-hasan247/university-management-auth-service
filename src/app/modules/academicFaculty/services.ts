@@ -1,11 +1,12 @@
 import { StatusCodes } from 'http-status-codes';
 import ApiError from '../../../errors/ApiError';
-import { IAcademic_faculty } from './interfaces';
+import { IAcademic_faculty, IAcademic_faculty_filters } from './interfaces';
 import { academic_faculty } from './models';
 import { IPaginationOptions } from '../../../interfaces/paginations';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { SortOrder } from 'mongoose';
+import { academic_faculty_searchable_fields } from './constants';
 
 const create_academic_faculty = async (payload: IAcademic_faculty) => {
   const result = await academic_faculty.create(payload);
@@ -21,8 +22,32 @@ const create_academic_faculty = async (payload: IAcademic_faculty) => {
 };
 
 const get_academic_faculties = async (
+  filters: IAcademic_faculty_filters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<IAcademic_faculty[]>> => {
+  const { searchTerm, ...filtersData } = filters;
+
+  const andConditions = [];
+
+  if (searchTerm) {
+    andConditions.push({
+      $or: academic_faculty_searchable_fields.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    });
+  }
+
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData)?.map(([field, value]) => ({
+        [field]: { $regex: value, $options: 'i' },
+      })),
+    });
+  }
+
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(paginationOptions);
   const sortConditions: { [key: string]: SortOrder } = {};
@@ -30,7 +55,15 @@ const get_academic_faculties = async (
   if (sortBy && sortOrder) {
     sortConditions[sortBy] = sortOrder;
   }
-  const result = await academic_faculty.find().sort().skip(skip).limit(limit);
+  const conditions = andConditions?.length > 0 ? { $and: andConditions } : {};
+
+  const result = await academic_faculty
+    .find(conditions)
+    .sort(sortConditions)
+    .skip(skip)
+    .limit(limit)
+    .lean();
+
   const total = await academic_faculty.countDocuments();
 
   return {
@@ -39,7 +72,7 @@ const get_academic_faculties = async (
       limit,
       total,
     },
-    data: result,
+    data: result as IAcademic_faculty[],
   };
 };
 
