@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
-import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import global_error_handler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
 import { StatusCodes } from 'http-status-codes';
 
@@ -28,7 +28,7 @@ app.use(routes);
 //   }
 // );
 
-app.use(globalErrorHandler);
+app.use(global_error_handler);
 
 // handling not found route
 app.use((req: Request, res: Response, next: NextFunction) => {

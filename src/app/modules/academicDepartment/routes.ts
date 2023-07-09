@@ -1,5 +1,5 @@
 import express from 'express';
-import requestValidate from '../../middlewares/requestValidation';
+import request_validate from '../../middlewares/requestValidation';
 import { academic_department_zod_validation } from './zodValidations';
 import { academic_department_controllers } from './controllers';
 
@@ -7,13 +7,13 @@ const router = express.Router();
 
 router.post(
   '/create_academic_department',
-  requestValidate(academic_department_zod_validation?.create_schema),
+  request_validate(academic_department_zod_validation?.create_schema),
   academic_department_controllers?.academic_department_create
 );
 
 router.patch(
   '/update_academic_department/:id',
-  requestValidate(academic_department_zod_validation?.update_schema),
+  request_validate(academic_department_zod_validation?.update_schema),
   academic_department_controllers?.academic_department_update
 );
 

@@ -1,8 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
 import ApiError from '../../../errors/ApiError';
-import { IPaginationOptions } from '../../../interfaces/paginations';
+import { I_pagination_options } from '../../../interfaces/paginations';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
-import { IGenericResponse } from '../../../interfaces/common';
+import { IGeneric_response } from '../../../interfaces/common';
 import { SortOrder } from 'mongoose';
 import {
   IAcademic_department,
@@ -26,10 +26,10 @@ const create_academic_department = async (payload: IAcademic_department) => {
   return result;
 };
 
-const get_academic_faculties = async (
+const get_academic_departments = async (
   filters: IAcademic_department_filters,
-  paginationOptions: IPaginationOptions
-): Promise<IGenericResponse<IAcademic_department[]>> => {
+  paginationOptions: I_pagination_options
+): Promise<IGeneric_response<IAcademic_department[]>> => {
   const { searchTerm, ...filtersData } = filters;
 
   const andConditions = [];
@@ -123,7 +123,7 @@ const delete_academic_department = async (id: string) => {
 };
 export const academic_department_services = {
   create_academic_department,
-  get_academic_faculties,
+  get_academic_departments,
   update_academic_department,
   single_academic_department,
   delete_academic_department,

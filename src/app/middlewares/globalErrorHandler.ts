@@ -1,55 +1,56 @@
 import { ErrorRequestHandler } from 'express';
 import config from '../../config';
-import ApiError from '../../errors/ApiError';
-import validationErrorHandler from '../../errors/validationErrorHandler';
-import { IGenericErrorResponse } from '../../interfaces/common';
-import { IGenericErrorMessages } from '../../interfaces/validationErrorMessage';
-import { errorLogger } from '../../shared/logger';
+import Api_Error from '../../errors/ApiError';
+import validation_error_handler from '../../errors/validationErrorHandler';
+import { IGeneric_error_response } from '../../interfaces/common';
+import { IGeneric_error_messages } from '../../interfaces/validationErrorMessage';
+import { error_logger } from '../../shared/logger';
 import { ZodError } from 'zod';
-import zodErrorHandler from '../../errors/zodErrorHandler';
-import handleCastError from '../../errors/handleCastError';
+import zod_error_handler from '../../errors/zodErrorHandler';
+import handle_cast_error from '../../errors/handleCastError';
 
-const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+const global_error_handler: ErrorRequestHandler = (err, req, res, next) => {
   //  ________ logger ___________
   config.env === 'development'
     ? console.log('ERROR', err)
-    : errorLogger.error('An error occurred', err);
+    : error_logger.error('An error occurred', err);
 
   //  _________ error response initialization __________
-  let statusCode = 500;
+  let status_code = 500;
   let message = 'Something went wrong!';
-  let errorMessages: IGenericErrorMessages[] = [];
+  let error_messages: IGeneric_error_messages[] = [];
 
   if (err?.name === 'ValidationError') {
     // ________Validation Error _______________
-    const simplifiedErrors: IGenericErrorResponse = validationErrorHandler(err);
-    statusCode = simplifiedErrors?.statusCode;
-    message = simplifiedErrors?.message;
-    errorMessages = simplifiedErrors?.errorMessages;
+    const simplified_errors: IGeneric_error_response =
+      validation_error_handler(err);
+    status_code = simplified_errors?.status_code;
+    message = simplified_errors?.message;
+    error_messages = simplified_errors?.error_messages;
     //
     // _________________________________________
   } else if (err?.name === 'CastError') {
     // ________ Cast Error _______________
-    const simplifiedErrors: IGenericErrorResponse = handleCastError(err);
-    statusCode = simplifiedErrors?.statusCode;
-    message = simplifiedErrors?.message;
-    errorMessages = simplifiedErrors?.errorMessages;
+    const simplified_errors: IGeneric_error_response = handle_cast_error(err);
+    status_code = simplified_errors?.status_code;
+    message = simplified_errors?.message;
+    error_messages = simplified_errors?.error_messages;
 
     //
     // _________________________________________
   } else if (err instanceof ZodError) {
     //  __________ Zod Error _______________
-    const simplifiedErrors: IGenericErrorResponse = zodErrorHandler(err);
-    statusCode = simplifiedErrors?.statusCode;
-    message = simplifiedErrors?.message;
-    errorMessages = simplifiedErrors?.errorMessages;
+    const simplified_errors: IGeneric_error_response = zod_error_handler(err);
+    status_code = simplified_errors?.status_code;
+    message = simplified_errors?.message;
+    error_messages = simplified_errors?.error_messages;
     //
     // ____________________________________________
-  } else if (err instanceof ApiError) {
+  } else if (err instanceof Api_Error) {
     //  ___________ Custom Error ____________
     message = err?.message;
-    statusCode = err?.statusCode;
-    errorMessages = err?.message
+    status_code = err?.status_code;
+    error_messages = err?.message
       ? [
           {
             path: '',
@@ -60,7 +61,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   } else if (err instanceof Error) {
     //  __________ built in error _____________
     message = err?.message;
-    errorMessages = err?.message
+    error_messages = err?.message
       ? [
           {
             path: '',
@@ -69,14 +70,14 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
         ]
       : [];
   }
-  res.status(statusCode).json({
+  res.status(status_code).json({
     status: false,
     message,
-    errorMessages,
+    error_messages,
     stack: config.env === 'development' ? err.stack : undefined,
   });
 
   next();
 };
 
-export default globalErrorHandler;
+export default global_error_handler;

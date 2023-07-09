@@ -1,34 +1,34 @@
 import express from 'express';
-import requestValidate from '../../middlewares/requestValidation';
-import { academicSemesterControllers } from './controllers';
-import { zodSchemas } from './zodValidations';
+import request_validate from '../../middlewares/requestValidation';
+import { academic_semester_controllers } from './controllers';
+import { academic_semester_zod_validation } from './zodValidations';
 
 const router = express.Router();
 
 router.post(
   '/create_semester',
-  requestValidate(zodSchemas?.academicSemesterCreateZodSchema),
-  academicSemesterControllers?.academicSemesterCreate
+  request_validate(academic_semester_zod_validation?.create_schema),
+  academic_semester_controllers?.academic_semester_create
 );
 
 router.patch(
   '/update_semester/:id',
-  requestValidate(zodSchemas?.academicSemesterUpdateZodSchema),
-  academicSemesterControllers?.semesterUpdate
+  request_validate(academic_semester_zod_validation?.update_schema),
+  academic_semester_controllers?.semester_update
 );
 
 router.get(
   '/get_single_semester/:id',
-  academicSemesterControllers?.getSingleSemester
+  academic_semester_controllers?.get_single_semester
 );
 router.delete(
   '/delete_semester/:id',
-  academicSemesterControllers?.semesterDelete
+  academic_semester_controllers?.semester_delete
 );
 
 router.get(
   '/get_semesters',
-  academicSemesterControllers?.getAllAcademicSemesters
+  academic_semester_controllers?.get_all_academic_semesters
 );
 
-export const academicSemesterRoutes = router;
+export const academic_semester_routes = router;

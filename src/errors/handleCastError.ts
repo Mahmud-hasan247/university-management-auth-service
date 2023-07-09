@@ -1,22 +1,22 @@
 import mongoose from 'mongoose';
-import { IGenericErrorResponse } from '../interfaces/common';
-import { IGenericErrorMessages } from '../interfaces/validationErrorMessage';
+import { IGeneric_error_response } from '../interfaces/common';
+import { IGeneric_error_messages } from '../interfaces/validationErrorMessage';
 
-const handleCastError = (error: mongoose.Error.CastError) => {
-  const errorMessages: IGenericErrorMessages[] = [
+const handle_cast_error = (error: mongoose.Error.CastError) => {
+  const error_messages: IGeneric_error_messages[] = [
     {
       path: error?.path,
       message: 'Invalid Id',
     },
   ];
 
-  const errorResponse: IGenericErrorResponse = {
-    statusCode: 400,
+  const error_response: IGeneric_error_response = {
+    status_code: 400,
     message: 'Invalid Id',
-    errorMessages,
+    error_messages,
   };
 
-  return errorResponse;
+  return error_response;
 };
 
-export default handleCastError;
+export default handle_cast_error;

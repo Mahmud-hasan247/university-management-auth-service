@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { AnyZodObject, ZodEffects } from 'zod';
 
-const requestValidate = (schema: AnyZodObject | ZodEffects<AnyZodObject>) => {
+const request_validate = (schema: AnyZodObject | ZodEffects<AnyZodObject>) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await schema.parseAsync({
@@ -17,4 +17,4 @@ const requestValidate = (schema: AnyZodObject | ZodEffects<AnyZodObject>) => {
   };
 };
 
-export default requestValidate;
+export default request_validate;

@@ -1,19 +1,6 @@
-// import { z } from 'zod';
-
-// const UserZodSchema = z.object({
-//   body: z.object({
-//     role: z.string({
-//       required_error: 'Role is required!',
-//     }),
-//     password: z.string().optional(),
-//   }),
-// });
-
-// export default UserZodSchema;
-
 import { z } from 'zod';
 
-export const userZodSchema = z.object({
+export const create_schema = z.object({
   body: z.object({
     role: z.string({
       required_error: 'Role is Required...',
@@ -21,3 +8,7 @@ export const userZodSchema = z.object({
     password: z.string().optional(),
   }),
 });
+
+export const user_zod_validation = {
+  create_schema,
+};

@@ -1,12 +1,12 @@
-import { IGenericErrorMessages } from './validationErrorMessage';
+import { IGeneric_error_messages } from './validationErrorMessage';
 
-export type IGenericErrorResponse = {
-  statusCode: number;
+export type IGeneric_error_response = {
+  status_code: number;
   message: string;
-  errorMessages: IGenericErrorMessages[];
+  error_messages: IGeneric_error_messages[];
 };
 
-export type IGenericResponse<T> = {
+export type IGeneric_response<T> = {
   meta: {
     page: number;
     limit: number;

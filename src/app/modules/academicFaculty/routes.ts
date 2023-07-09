@@ -1,19 +1,19 @@
 import express from 'express';
 import { academic_faculty_controllers } from './controllers';
 import { academic_faculty_zod_validation } from './zodValidations';
-import requestValidate from '../../middlewares/requestValidation';
+import request_validate from '../../middlewares/requestValidation';
 
 const router = express.Router();
 
 router.post(
   '/create_academic_faculty',
-  requestValidate(academic_faculty_zod_validation?.create_schema),
+  request_validate(academic_faculty_zod_validation?.create_schema),
   academic_faculty_controllers?.academic_faculty_create
 );
 
 router.patch(
   '/update_academic_faculty/:id',
-  requestValidate(academic_faculty_zod_validation?.update_schema),
+  request_validate(academic_faculty_zod_validation?.update_schema),
   academic_faculty_controllers?.academic_faculty_update
 );
 

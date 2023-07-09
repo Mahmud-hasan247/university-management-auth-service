@@ -1,11 +1,11 @@
 import config from '../../../config';
 import { IUser } from './user.interface';
 import { User } from './user.model';
-import { generateUniqueId } from './user.utils';
+import { generate_student_Id } from './user.utils';
 
-const createUser = async (user: IUser): Promise<IUser | null> => {
+const create_user = async (user: IUser): Promise<IUser | null> => {
   // auto generated incremental id
-  const id = await generateUniqueId();
+  const id = await generate_student_Id();
 
   user.id = id;
 
@@ -15,17 +15,17 @@ const createUser = async (user: IUser): Promise<IUser | null> => {
   }
 
   // ______ inserting a user to database ________
-  const createdUser = await User.create(user);
+  const created_user = await User.create(user);
 
   //  ______ if insertion is failed _________
-  if (!createdUser) {
+  if (!created_user) {
     throw new Error('failed to creating user!');
   }
 
   //  _____ returning the created user ______
-  return createdUser;
+  return created_user;
 };
 
-export default {
-  createUser,
+export const user_services = {
+  create_user,
 };

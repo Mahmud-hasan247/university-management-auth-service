@@ -2,9 +2,9 @@ import { StatusCodes } from 'http-status-codes';
 import ApiError from '../../../errors/ApiError';
 import { IAcademic_faculty, IAcademic_faculty_filters } from './interfaces';
 import { academic_faculty } from './models';
-import { IPaginationOptions } from '../../../interfaces/paginations';
+import { I_pagination_options } from '../../../interfaces/paginations';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
-import { IGenericResponse } from '../../../interfaces/common';
+import { IGeneric_response } from '../../../interfaces/common';
 import { SortOrder } from 'mongoose';
 import { academic_faculty_searchable_fields } from './constants';
 
@@ -23,8 +23,8 @@ const create_academic_faculty = async (payload: IAcademic_faculty) => {
 
 const get_academic_faculties = async (
   filters: IAcademic_faculty_filters,
-  paginationOptions: IPaginationOptions
-): Promise<IGenericResponse<IAcademic_faculty[]>> => {
+  paginationOptions: I_pagination_options
+): Promise<IGeneric_response<IAcademic_faculty[]>> => {
   const { searchTerm, ...filtersData } = filters;
 
   const andConditions = [];
