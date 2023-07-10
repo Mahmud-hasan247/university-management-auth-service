@@ -1,8 +1,8 @@
 import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import global_error_handler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
-import { StatusCodes } from 'http-status-codes';
 
 const app: Application = express();
 
