@@ -2,24 +2,7 @@ import { Model, Types } from 'mongoose';
 import { IAcademic_department } from '../academicDepartment/interfaces';
 import { IAcademic_faculty } from '../academicFaculty/interfaces';
 import { I_academic_semester } from '../academicSemester/interfaces';
-
-export type I_gender = 'Male' | 'Female';
-
-export type I_blood_group =
-  | 'O+'
-  | 'O-'
-  | 'A+'
-  | 'A-'
-  | 'B+'
-  | 'B-'
-  | 'AB+'
-  | 'AB-';
-
-export type I_user_name = {
-  first_name: string;
-  middle_name?: string;
-  last_name?: string;
-};
+import { I_blood_group, I_gender, I_user_name } from '../../../constants/user';
 
 export type I_parents = {
   father_name: string;
