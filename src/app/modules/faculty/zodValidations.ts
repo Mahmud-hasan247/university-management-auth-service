@@ -13,26 +13,6 @@ const update_schema = z.object({
         .optional(),
       gender: z.enum([...genders] as [string, ...string[]]).optional(),
       date_of_birth: z.string().optional(),
-      parents: z
-        .object({
-          father_name: z.string().optional(),
-          father_occupation: z.string().optional(),
-          father_contact_no: z.string().optional(),
-          mother_name: z.string().optional(),
-          mother_occupation: z.string().optional(),
-          mother_contact_no: z.string().optional(),
-          address: z.string().optional(),
-        })
-        .optional(),
-      guardian: z
-        .object({
-          name: z.string().optional(),
-          occupation: z.string().optional(),
-          relation: z.string().optional(),
-          contact_no: z.string().optional(),
-          address: z.string().optional(),
-        })
-        .optional(),
       contact_no: z.string().optional(),
       emergency_contact_no: z.string().optional(),
       blood_group: z
@@ -44,11 +24,11 @@ const update_schema = z.object({
       profile_image: z.string().optional(),
       academic_department: z.string().optional(),
       academic_faculty: z.string().optional(),
-      academic_semester: z.string().optional(),
+      designation: z.string().optional(),
     })
     .optional(),
 });
 
-export const student_zod_validation = {
+export const faculty_zod_validation = {
   update_schema,
 };

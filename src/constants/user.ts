@@ -1,17 +1,14 @@
-export type I_gender = 'Male' | 'Female';
+import { I_blood_group, I_gender } from '../interfaces/user';
 
-export type I_blood_group =
-  | 'O+'
-  | 'O-'
-  | 'A+'
-  | 'A-'
-  | 'B+'
-  | 'B-'
-  | 'AB+'
-  | 'AB-';
+export const genders: I_gender[] = ['Male', 'Female'];
 
-export type I_user_name = {
-  first_name: string;
-  middle_name?: string;
-  last_name?: string;
-};
+export const blood_groups: I_blood_group[] = [
+  'O+',
+  'O-',
+  'A+',
+  'A-',
+  'B+',
+  'B-',
+  'AB+',
+  'AB-',
+];

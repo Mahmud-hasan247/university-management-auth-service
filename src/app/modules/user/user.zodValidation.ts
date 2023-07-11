@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { blood_groups, genders } from '../student/constants';
+import { blood_groups, genders } from '../../../constants/user';
 
 const student_create_schema = z.object({
   body: z.object({
@@ -71,24 +71,6 @@ const student_create_schema = z.object({
     }),
   }),
 });
-
-// _id: ObjectID;
-// id: string;
-// name: firstName;
-// middleName(optional);
-// lastName;
-// dateOfBirth;
-// email;
-// contactNo;
-// emergencyContactNo;
-// gender;
-// permanentAddress;
-// presentAddress;
-// bloodGroup(optional);
-// designation;
-// academicDepartment(reference);
-// academicFaculty(reference);
-// profileImage(optional);
 
 const faculty_create_schema = z.object({
   body: z.object({
