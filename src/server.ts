@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 import app from './app';
 import config from './config/index';
-import { logger, errorLogger } from './shared/logger';
+import { logger, error_logger } from './shared/logger';
 import { Server } from 'http';
 
 const { port, database_url } = config;
 let server: Server;
 process.on('uncaughtException', err => {
-  errorLogger.error('uncaught detected', err);
+  error_logger.error('uncaught detected', err);
   process.exit(1);
 });
 
@@ -19,7 +19,7 @@ async function justGo() {
       logger.info(`University Application is listening on port ${port}`);
     });
   } catch (error) {
-    errorLogger.error('Failed to connect database', error);
+    error_logger.error('Failed to connect database', error);
   }
 
   process.on('unhandledRejection', err => {
@@ -28,7 +28,7 @@ async function justGo() {
     );
     if (server) {
       server.close(() => {
-        errorLogger.error('unhandled rejection', err);
+        error_logger.error('unhandled rejection', err);
       });
       process.exit(1);
     } else {
