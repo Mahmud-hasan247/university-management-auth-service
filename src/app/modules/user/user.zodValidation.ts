@@ -4,7 +4,7 @@ import { blood_groups, genders } from '../../../constants/user';
 const student_create_schema = z.object({
   body: z.object({
     student: z.object({
-      id: z.string({ required_error: 'Id is required' }),
+      // id: z.string({ required_error: 'Id is required' }),
       password: z.string().optional(),
       name: z.object({
         first_name: z.string({

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ErrorRequestHandler } from 'express';
 import config from '../../config';
 import Api_Error from '../../errors/ApiError';
@@ -76,8 +77,7 @@ const global_error_handler: ErrorRequestHandler = (err, req, res, next) => {
     error_messages,
     stack: config.env === 'development' ? err.stack : undefined,
   });
-
-  next();
+  // next();
 };
 
 export default global_error_handler;

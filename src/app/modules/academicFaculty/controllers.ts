@@ -25,6 +25,8 @@ const academic_faculty_create = catchAsync(
 
 const academic_faculties_get = catchAsync(
   async (req: Request, res: Response) => {
+    console.log(req.user, 'auth token');
+
     const filters = pick(req?.query, academic_faculty_filterable_fields);
     const pagination_options = pick(req?.query, pagination_fields);
     const result = await academic_faculty_services?.get_academic_faculties(

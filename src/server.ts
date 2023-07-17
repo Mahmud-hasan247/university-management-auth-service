@@ -14,9 +14,9 @@ process.on('uncaughtException', err => {
 async function justGo() {
   try {
     await mongoose.connect(database_url as string);
-    logger.info('Database is Connected successfully');
+    logger.info('\nDatabase is Connected successfully\n');
     app.listen(port, () => {
-      logger.info(`University Application is listening on port ${port}`);
+      logger.info(`University Application is listening on port ${port}\n`);
     });
   } catch (error) {
     error_logger.error('Failed to connect database', error);

@@ -1,15 +1,15 @@
-import { Student } from './../student/model';
+import { StatusCodes } from 'http-status-codes';
 import mongoose from 'mongoose';
 import config from '../../../config';
+import Api_Error from '../../../errors/ApiError';
 import { academic_semester } from '../academicSemester/models';
+import { I_faculty } from '../faculty/interfaces';
+import { Faculty } from '../faculty/model';
 import { I_student } from '../student/interface';
+import { Student } from './../student/model';
 import { IUser } from './user.interface';
 import { User } from './user.model';
 import { generate_faculty_id, generate_student_Id } from './user.utils';
-import Api_Error from '../../../errors/ApiError';
-import { StatusCodes } from 'http-status-codes';
-import { I_faculty } from '../faculty/interfaces';
-import { Faculty } from '../faculty/model';
 
 const create_student = async (
   student: I_student,
